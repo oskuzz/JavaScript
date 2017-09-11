@@ -21,30 +21,75 @@
       border-radius: 50%;
       cursor: pointer;
     }
+
+    #nollaus {
+      width: 100px;
+      height: 100px;
+      background-color: black;
+      color: white;
+      margin: 50px auto;
+      font-size: 30px;
+      padding: 30px 0px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
   </style>
 </head>
 
 <body>
   <main>
     <div id=laskuri>0</div>
+    <div id=plusyks></div>
+    <div id=nollaus> Nollaa </div>
+
 
     <script>
+      var vari = 30;
+      var vari2 = 0;
+      var vari3 = 105;
       var laskuri = document.getElementById('laskuri');
       var arvo = parseInt(laskuri.innerHTML);
 
       function kasvata() {
         // kasvata laskurin arvoa ja päivitä se sivulle
-
+        arvo = arvo + 1;
+        laskuri.innerHTML = arvo;
         asetaTaustaVari();
       }
 
       function asetaTaustaVari() {
+        vari += 5;
+        vari2 += 10;
+        vari3 += 15;
+        if(vari > 255) {
+          vari = 0;
+        }
+        if(vari2 > 255) {
+          vari2 = 0;
+        }
+        if(vari3 > 255) {
+          vari3 = 0;
+        }
+        laskuri.style.color = "rgb(" + vari + "," + vari2 + "," +vari3 + ")";
+        document.body.style.backgroundColor = "rgb(" + vari + "," + vari2 + "," +vari3 + ")";
         // aseta taustaväri laskurin arvon perusteella:
         // parillinen: sininen, pariton: punainen
 
       }
 
+      function nollaa() {
+        arvo = 0;
+        vari = 0;
+        vari2 = 0;
+        vari3 = 0;
+        laskuri.style.color = "rgb(255,255,255)";
+        document.body.style.backgroundColor ="rgb(255,255,255)";
+        laskuri.innerHTML = arvo;
+      }
+
       laskuri.onclick = kasvata;
+      nollaus.onclick = nollaa;
+
     </script>
 
     </main>

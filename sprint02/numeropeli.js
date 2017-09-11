@@ -10,7 +10,13 @@ console.log("Arvattava: " + arvattava);
 // alkuarvo on undefined, jotta erotetaan, onko tehty yhtään arvausta
 // vai ei
 var arvaus = undefined;
-
+var arvaukset = 0;
+var alin = 0;
+var ylin = 0;
+var numero = document.getElementById('numerot');
+var alempi = document.getElementById('alempi');
+var ylempi = document.getElementById('ylempi');
+var vihje = document.getElementById('vihje');
 // määrittele myös muuttujat pelaajan nykyistä arvausta, parasta
 // alinta ja parasta ylintä arvausta varten sekä tehtyjen arvausten
 // lukumäärää varten
@@ -33,6 +39,26 @@ function arvausTehty() {
   // tyhjennetään lomake uutta arvausta varten
   document.getElementById('lomake').reset();
 
+  arvaukset++;
+
+  if(arvaus < arvattava) {
+    if(arvaus < alin) {
+      alin = arvaus;
+      alempi.innerHTML = "Alin: " + alin;
+      vihje.innerHTML = "Luku on suurempi";
+    }
+  } else if (arvaus > arvattava){
+    if(arvaus > ylin) {
+      ylin = arvaus;
+      ylempi.innerHTML = "Ylin: " + ylin;
+      vihje.innerHTML = "Luku on pienempi";
+    }
+  } else if (arvaus === arvattava) {
+    vihje.innerHTML = "Onnittelut. Arvausten määrä: " + arvaukset;
+    for(var i = 0; i < arvattava; i++) {
+      numero.innerHTML = i;
+    }
+  }
   /*
   Toteuta tähän algoritmi:
 
