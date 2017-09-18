@@ -1,4 +1,4 @@
-'use strict'
+  'use strict'
 
 // arvotaan arvattava numero väliltä 0-100, 0 ja sata myös mahdollisia
 var arvattava = Math.floor(Math.random() * (100 + 1) );
@@ -12,7 +12,7 @@ console.log("Arvattava: " + arvattava);
 var arvaus = undefined;
 var arvaukset = 0;
 var alin = 0;
-var ylin = 0;
+var ylin = 100;
 var numero = document.getElementById('numerot');
 var alempi = document.getElementById('alempi');
 var ylempi = document.getElementById('ylempi');
@@ -30,6 +30,20 @@ var vihje = document.getElementById('vihje');
 //
 // Event-käsittelijä lomakkeelle
 //
+
+function nollaus() {
+  vihje.innerHTML = "";
+  numero.innerHTML = "";
+  alempi.innerHTML = "";
+  ylempi.innerHTML = "";
+  alin = 0;
+  ylin = 100;
+  arvaukset = 0;
+  arvaus = undefined;
+  arvattava = Math.floor(Math.random() * (100 + 1) );
+  console.log("Arvattava: " + arvattava);
+}
+
 function arvausTehty() {
   // haetaan käyttäjän syöttämä arvo ja tulkitaan se numeroksi
   var syote = document.getElementById('luku').value;
@@ -42,22 +56,24 @@ function arvausTehty() {
   arvaukset++;
 
   if(arvaus < arvattava) {
-    if(arvaus < alin) {
+    if(arvaus > alin) {
       alin = arvaus;
       alempi.innerHTML = "Alin: " + alin;
-      vihje.innerHTML = "Luku on suurempi";
     }
+    vihje.innerHTML = "Luku on suurempi";
   } else if (arvaus > arvattava){
-    if(arvaus > ylin) {
+    if(arvaus < ylin) {
       ylin = arvaus;
       ylempi.innerHTML = "Ylin: " + ylin;
-      vihje.innerHTML = "Luku on pienempi";
     }
+    vihje.innerHTML = "Luku on pienempi";
   } else if (arvaus === arvattava) {
     vihje.innerHTML = "Onnittelut. Arvausten määrä: " + arvaukset;
-    for(var i = 0; i < arvattava; i++) {
-      numero.innerHTML = i;
+    var j = [];
+    for(var i = 0; i <= arvattava; i++) {
+      j[i] = i
     }
+    document.getElementById('numerot').innerHTML = j;
   }
   /*
   Toteuta tähän algoritmi:
